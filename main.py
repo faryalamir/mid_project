@@ -2,6 +2,7 @@ import pandas as pd
 from pandas import DataFrame
 from os.path import dirname, join
 import matplotlib.pyplot as plt
+from scipy.stats import ttest_ind
 
 data_path = join(dirname(__file__), "data/raw/companies.xlsx")
 pd.set_option("display.max_columns", None)
@@ -102,6 +103,53 @@ def q2(df: DataFrame) -> None:
     plt.tight_layout()
     plt.show()
 
+def q3(df: DataFrame) -> None:
+    pass
+
+def q4(df: DataFrame) -> None:
+    # Filter specific columns
+    df_4 = pd.DataFrame(df, columns=['ticker_symbol', 'years', 'period_ending', 'research_and_development', 'gics_sector'])
+
+    # Get data for healthcare and IT sectors for year 1
+    healthcare_df = df_4[df_4['gics_sector'] == 'Health Care']
+
+    print(healthcare_df.head())
+    print(healthcare_df["research_and_development"].describe())
+
+    # Create a boxplot to visualize R&D spending over the years
+    plt.figure(figsize=(12, 8))
+    plt.boxplot([healthcare_df[healthcare_df['years'] == year]['research_and_development'] for year in healthcare_df['years'].unique()], 
+                labels=healthcare_df['years'].unique())
+    plt.xlabel('Year')
+    plt.ylabel('R&D Spending')
+    plt.title('Health Care R&D Spending Over Years (Boxplot)')
+    plt.grid(axis='y')
+    plt.show()
+
+def q5(df: DataFrame) -> None:
+    # Filter specific columns
+    df_5 = pd.DataFrame(df, columns=['ticker_symbol', 'years', 'period_ending', 'research_and_development', 'gics_sector'])
+
+    # Get data for healthcare and IT sectors for year 1
+    hcare_df = df_5[(df_5['gics_sector'] == 'Health Care') & (df_5['years'] == 1)]
+    itech_df = df_5[(df_5['gics_sector'] == 'Information Technology') & (df_5['years'] == 1)]
+
+    print(hcare_df.head())
+    print(itech_df.head())
+
+    # Perform a t-test to compare the R&D spending distributions
+    t_stat, p_value = ttest_ind(hcare_df['research_and_development'], itech_df['research_and_development'], equal_var=False)
+
+    # Visualize the results using a bar chart
+    plt.bar(['Health Care', 'Information Technology'], [hcare_df['research_and_development'].mean(), itech_df['research_and_development'].mean()], yerr=[hcare_df['research_and_development'].std(), itech_df['research_and_development'].std()])
+    plt.ylabel('Mean R&D Spending')
+    plt.title('Comparison of R&D Spending Between Health Care and IT Companies in Year 1')
+    plt.show()
+
+    # Print the t-test results
+    print(f'T-statistic: {t_stat}')
+    print(f'P-value: {p_value}')
+
 def main():
     # Load data
     df = pd.read_excel(data_path, engine="openpyxl")
@@ -116,11 +164,19 @@ def main():
     print(df_cleaned.dtypes)
 
     # Question 1
-    # q1(df_cleaned)
+    q1(df_cleaned)
 
     # Question 2
     q2(df_cleaned)
 
+    # Question 3
+    q3(df_cleaned)
+
+    # Question 4
+    q4(df_cleaned)
+
+    # Question 5
+    q5(df_cleaned)
 
 if __name__ == "__main__":
     main()
