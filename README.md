@@ -10,7 +10,7 @@ We normalize column names, filter relevant columns, and ensure that the dataset 
 --------------------------------
 Code
 -----
-The Python code for data preprocessing and cleaning can be found in data_preprocessing.py.
+The Python code for data preprocessing and cleaning can be found in main.py
 
 --------------------
 Analysis 2: Total R&D Spending By Company In Health Care Sector Over 4 Years
@@ -55,7 +55,7 @@ Make sure to install the required libraries using pip install pandas matplotlib 
 Presentation
 --------------
 
-A presentation summarizing these analyses and their conclusions can be found in the presentation.md file.
+A presentation summarizing these analyses and their conclusions can be found in the slides folder.
 --------------
 
 Conclusion
