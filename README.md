@@ -1,55 +1,42 @@
-# Healthcare R&D Spending Analysis
-This project analyzes Research and Development (R&D) spending data for companies in the Health Care sector.
+# Analysis of R&D Spending in Health Care and Information Technology Sectors
+This repository contains Python code and data analysis for investigating Research and Development (R&D) spending in the Health Care and Information Technology (IT) sectors. The analysis explores trends in R&D spending, statistical comparisons between the two sectors, and visualizations to provide insights into the data.
 
-The python code for analysis is available in `main.py`.
+Getting Started
+## Prerequisites
+Python 3.x
+Jupyter Notebook (optional)
+Required Python packages: pandas, scipy, matplotlib, plotly, numpy
 
-To run execute:
-```python 
-python main.py
-```
+## Installation
+You can install the required packages using pip:
+bash
+Copy code
+pip install pandas scipy matplotlib plotly numpy
+Data
+The analysis uses a dataset of company financials, specifically R&D spending, which is loaded from an Excel file named companies.xlsx. The dataset is cleaned and normalized to prepare it for analysis.
 
-## Data Preprocessing and Cleaning
-The data is loaded from an `xlsx` file in to a pandas dataframe. The data is relatively clean. The columns are normalized, including the values in the years column. Relevant columns are filtered and the data is ready for exploration.
+## Analysis
+### Question 1: Analyze Health Care Sector R&D Spending Year-over-Year
+The code filters the data for the Health Care sector, calculates yearly spending by companies, and plots the year-over-year R&D spending change.
+The code calculates the aggregated yearly spending change across all companies in the Health Care sector.
+It computes the percentage change (pct_change) in R&D spending year-over-year.
+Any NaN values (resulting from the first year with no previous year for comparison) are filled with 0.
+The change values are rounded to four decimal places and stored in the yearly_spending DataFrame
+### Question 2: Comparing Health Care and IT Sectors in Year 1
+This section filters data for both sectors in Year 1 and compares their mean, median, and standard deviation of R&D spending. It also creates histograms for both sectors to visualize the distribution.
+### Question 3: Total R&D Spending by Company in Health Care Sector
+The code groups the data by company ticker symbols and calculates the total R&D spending for each company in the Health Care sector. It then visualizes the results using a treemap.
+### Question 4: Health Care R&D Spendings Over Years
+This section focuses on R&D spending trends in the Health Care sector. It creates a boxplot to visualize the distribution of R&D spending over the years.
+### Question 5: Statistical Hypothesis Test
+A t-test is performed to compare the R&D spending distribution between Health Care and IT companies in Year 1. The results are visualized using a bar chart, and the t-statistic and p-value are printed.
 
+## Usage
+Clone this repository to your local machine.
+Make sure you have the required packages installed.
+Run the Jupyter Notebook or Python script to execute the analysis.
 
-## Analaysis
-**Total R&D Spending By Company In Health Care Sector Over 4 Years**
+## Acknowledgments
+The dataset used in this analysis is hypothetical and is provided for demonstration purposes only.
 
-This analysis focuses on visualizing the total R&D spending by individual companies in the Health Care sector over a 4-year period.
-
-We use a treemap visualization to display the distribution of R&D spending among companies.
-
-The main visualization is a treemap that provides insights into R&D spending trends within the Health Care sector.
-
-Health Care vs. IT R&D Spending Comparison in Year 1
-In this analysis, we compare R&D spending between the Health Care and Information Technology (IT) sectors for Year 1.
-We perform a statistical t-test to determine if there is a significant difference in R&D spending distributions between these sectors.
-Code and Visualization
-
-The key visualization is a bar chart comparing mean R&D spending between the Health Care and IT sectors in Year 1.
-
-
-Total R&D Spending Change Across Health Care Companies
-This analysis focuses on understanding the aggregated yearly spending changes across Health Care companies.
-We calculate spending changes, round off the values, and visualize the data to identify trends.
-Code and Visualization
-
-The primary visualization is a line chart showing the changes in R&D spending over the years.
-
-
-Total R&D Spending By Company In Health Care Sector in 4 Years
-In this analysis, we aim to visualize the total R&D spending by Health Care companies over a 4-year period.
-We use a treemap to represent the distribution of spending among companies over these years.
-Code and Visualization
-
-
-The main visualization is a treemap that offers a comprehensive view of R&D spending trends over the 4-year period.
-Usage
-You can use the provided Python code to replicate these analyses with your own dataset.
-Make sure to install the required libraries using pip install pandas matplotlib plotly scipy.
-
-## Presentation
-A presentation summarizing these analyses and their conclusions can be found in the slides folder.
-
-## Conclusion
-This project provides valuable insights into R&D spending patterns in the Health Care sector. It covers data preprocessing, visualization of spending trends, statistical comparisons, and treemap visualizations to help stakeholders make informed decisions regarding investments and resource allocation.
+This analysis is a simplified example and can be extended and customized for more complex real-world datasets.
