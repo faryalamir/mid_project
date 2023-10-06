@@ -62,6 +62,7 @@ def q1(df: DataFrame) -> None:
     )
     plt.xlabel("Year")
     plt.ylabel("Spending Change")
+    plt.title('Health Care R&D Spending YoY percentage change')
     plt.grid(True)
     plt.show()
 
@@ -104,7 +105,23 @@ def q2(df: DataFrame) -> None:
     plt.show()
 
 def q3(df: DataFrame) -> None:
-    pass
+    # Group the data by 'ticker_symbol' and calculate the total R&D spending for each company
+    company_spending = df.groupby('ticker_symbol')['research_and_development'].sum().reset_index()
+
+    # Sort the companies by R&D spending in descending order and select the top 48
+    top_48_companies = company_spending.sort_values(by='research_and_development', ascending=False).head(48)
+
+    # Create a bar plot
+    plt.figure(figsize=(12, 6))
+    plt.bar(top_48_companies['ticker_symbol'], top_48_companies['research_and_development'])
+    plt.xlabel('Company Ticker Symbol')
+    plt.ylabel('Total R&D Spending')
+    plt.title('Total R&D Spending by Top 48 Companies in the Health Care Sector')
+    plt.xticks(rotation=90)  # Rotate x-axis labels for better readability
+    plt.tight_layout()
+
+    # Show the plot
+    plt.show()
 
 def q4(df: DataFrame) -> None:
     # Filter specific columns
